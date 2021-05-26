@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <template id="pos_promotion_assets" name="pos_promotion assets" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/pos_promotion/static/src/css/pos_promotion.css" />
+                <script type="text/javascript" src="/pos_promotion/static/src/js/Chrome.js"/>
+                <script type="text/javascript" src="/pos_promotion/static/src/js/ButtonSetCoupon.js"/>
+                <script type="text/javascript" src="/pos_promotion/static/src/js/PaymentScreen.js"/>
+                <script type="text/javascript" src="/pos_promotion/static/src/js/Models.js"/>
+                <script type="text/javascript" src="/pos_promotion/static/src/js/ProductScreen.js"/>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

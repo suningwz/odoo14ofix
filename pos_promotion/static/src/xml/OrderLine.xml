@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
+        <xpath expr="//ul[hasclass('info-list')]" position="inside">
+            <div class="line_extend">
+                <li class="info alert_line" t-if="props.line.coupon_program_name">
+                    Promotion/Coupon: <t t-esc="props.line.coupon_program_name"/>
+                </li>
+                <li class="info alert_line" t-if="props.line.coupon_code">
+                    Coupon Code: <t t-esc="props.line.coupon_code"/>
+                </li>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

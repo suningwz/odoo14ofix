@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="coupon_program_view_coupon_program_form" model="ir.ui.view">
+        <field name="name">coupon.program.form</field>
+        <field name="model">coupon.program</field>
+        <field name="inherit_id" ref="coupon.coupon_program_view_coupon_program_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='coupon_count']/.." position="before">
+                <button class="oe_stat_button" type="object" icon="fa-usd" name="action_view_pos_orders">
+                    <field name="pos_order_count" string="POS Orders" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="coupon_program_view_promo_program_form" model="ir.ui.view">
+        <field name="name">coupon.program.form</field>
+        <field name="model">coupon.program</field>
+        <field name="inherit_id" ref="coupon.coupon_program_view_promo_program_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='coupon_count']/.." position="before">
+                <button class="oe_stat_button" type="object" icon="fa-usd" name="action_view_pos_orders">
+                    <field name="pos_order_count" string="POS Orders" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_coupon_program_kanban" model="ir.ui.view">
+        <field name="name">coupon.program.kanban</field>
+        <field name="model">coupon.program</field>
+        <field name="inherit_id" ref="coupon.view_coupon_program_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('coupon-count-label')]" position="after">
+                <div class="col-4 text-center">
+                    <strong>POS Orders</strong>
+                </div>
+            </xpath>
+            <xpath expr="//div[hasclass('coupon-count-value')]" position="after">
+                <div class="col-4 text-center">
+                    <field name="pos_order_count"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="coupon_view_form" model="ir.ui.view">
+        <field name="name">coupon.coupon.form</field>
+        <field name="model">coupon.coupon</field>
+        <field name="inherit_id" ref="coupon.coupon_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="pos_order_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
