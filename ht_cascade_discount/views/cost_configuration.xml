@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <!-- cost configuration history tree view -->
+         <record id="cost_history_tree_view" model="ir.ui.view">
+            <field name="name">cost.history.tree.view</field>
+            <field name="model">cost.history</field>
+            <field name="arch" type="xml">
+                <tree create="false" editable="bottom">
+                    <field name="product_id"/>
+                    <field name="user_id"/>
+                    <field name="update"/>
+                    <field name="distcount_type"/>
+                    <field name="D1"/>
+                    <field name="D2"/>
+                    <field name="D3"/>
+                    <field name="D4"/>
+                    <field name="D5"/>
+                    <field name="cost"/>
+                </tree>
+            </field>
+        </record>
+        <!-- cost configuration history Action -->
+        <record id="action_cost_configuration" model="ir.actions.act_window">
+            <field name="name">Cost Configuration</field>
+            <field name="res_model">cost.history</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('product_id', '=', active_id)]</field>
+        </record>
+
+        <!-- price configuration history tree view -->
+         <record id="price_history_tree_view" model="ir.ui.view">
+            <field name="name">price.history.tree.view</field>
+            <field name="model">price.history</field>
+            <field name="arch" type="xml">
+                <tree create="false">
+                    <field name="product_id"/>
+                    <field name="uom_id"/>
+                    <field name="user_id"/>
+                    <field name="update"/>
+                    <field name="scale_type"/>
+                    <field name="about_net"/>
+                    <field name="price_before_VAT"/>
+                    <field name="price_including_VAT"/>
+                </tree>
+            </field>
+        </record>
+        <!-- price configuration history Action -->
+        <record id="action_price_configuration" model="ir.actions.act_window">
+            <field name="name">Price Configuration</field>
+            <field name="res_model">price.history</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('product_id', '=', active_id)]</field>
+        </record>
+
+		<record id="cascade_discount_form_view" model="ir.ui.view">
+            <field name="name">cascade.discount.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//page[@name='purchase']" position="after">
+            		<page string="Cost">
+                        <group>
+                            <group>
+                                <field name="pro_lst_price" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+                            </group>
+                            <group>
+                                <field name="application"/>
+                                <button name="cal_product_list_cost" string="Calculate" type="object" class="oe_highlight" attrs="{'invisible' : [('pro_lst_price','&lt;=',0)]}"/>
+                                <button name="update_cost" string="Update Cost" type="object" class="oe_highlight" />
+                            </group>
+                        </group>
+                        
+                        <field name="cost_cofig_ids"> 
+        	                <tree string="Cost Configuration" editable="bottom">
+                                <field name="distcount_type"/>
+                                <field name="D1"/>
+                                <field name="D2"/>
+                                <field name="D3"/>
+                                <field name="D4"/>
+                                <field name="D5"/>
+                                <field name="cost" widget="monetary" options="{'currency_field': 'company_currency_id'}" readonly="1"/>
+                            </tree>
+                        </field>
+            		</page>
+                    <page string="Price">
+                        <group>
+                            <group>
+                                <field name="price_cost_of_sale" readonly="1"/>
+                                <field name="presentation_uom_id"/>
+                                <field name="MAP_price" />
+                                <field name="public_ref_price" />
+                            </group>
+                            <group>
+                                <field name="price_application_date"/>
+                                <button name="cal_product_list_price" string="Calculate" type="object" class="oe_highlight"/>
+                                <button name="update_price" string="Update Price" type="object" class="oe_highlight" />
+                            </group>
+                        </group>
+                        <field name="price_config_ids"> 
+                            <tree string="Price Configuration" editable="bottom">
+                                <field name="scale_type" required="1"/>
+                                <field name="about_net"/>
+                                <field name="price_before_VAT" widget="monetary" options="{'currency_field': 'company_currency_id'}" />
+                                <field name="price_including_VAT" widget="monetary" options="{'currency_field': 'company_currency_id'}" />
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button type="action" name="%(action_cost_configuration)d" class="btn oe_stat_button" icon="fa-book">
+                        <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Cost</span>
+                                <span class="o_stat_text">History</span>
+                            </div>
+                    </button>
+                    <button type="action" name="%(action_price_configuration)d" class="btn oe_stat_button" icon="fa-book">
+                        <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Price</span>
+                                <span class="o_stat_text">History</span>
+                            </div>
+                    </button>
+                </xpath>
+        	</field>
+
+    	</record>
+	</data>
+</odoo>

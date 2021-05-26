@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	  <record model="ir.ui.view" id="view_department_form_inherit_ofix">
+        <field name="name">view.department.form.inherit.ofix</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+        	<field name="company_id" position="after">
+        		<field name="branch_ids" required="1" widget="many2many_tags"/>
+        	</field>
+		</field>
+		</record>
+	  <record model="ir.ui.view" id="view_department_tree_inherit_ofix">
+        <field name="name">view.department.tree.inherit.ofix</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_tree"/>
+        <field name="arch" type="xml">
+        	<field name="company_id" position="after">
+        		<field name="branch_ids" required="1" widget="many2many_tags"/>
+        	</field>
+		</field>
+	</record>
+
+	  <record model="ir.ui.view" id="view_department_filter_inherit_ofix">
+        <field name="name">view.department.filter.inherit.ofix</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_filter"/>
+        <field name="arch" type="xml">
+        	<field name="manager_id" position="after">
+        		<field name="branch_ids"/>
+        	</field>
+		</field>
+	</record>
+		
+</odoo>

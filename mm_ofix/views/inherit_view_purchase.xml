@@ -1,0 +1,14 @@
+<odoo>
+  <data>
+    <record id="view_add_orden_compra_mm" model="ir.ui.view">
+      <field name="name">view.add.orden.compra.mm</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_shipping_id']" position="after">
+              <field name="orden_compra"/>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

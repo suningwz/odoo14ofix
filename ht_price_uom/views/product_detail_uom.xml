@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="product_detail_uom_page" name="product detail page" inherit_id="website_sale.product_price">
+		<xpath expr="//div[hasclass('product_price')]" position="before">
+			<strong>Sales Presentations</strong>
+			<h1 id="demo"><t t-esc="product.list_price"/></h1>
+			<script>
+				function myFunction() {
+				  var x = document.getElementById("mySelect").value;
+				  document.getElementById("demo").innerHTML = "You selected: " + x;
+				}
+			</script>
+			<!-- <t t-foreach="my_details" t-as="uom_p">
+				<span t-esc="uom_p.fixed_price"/>
+			</t> -->
+			<!-- 
+	        <t t-set="website_sale_product_uom" t-value="website.get_product_uom_available()" />
+	        <div t-attf-class="dropdown#{'' if website_sale_product_uom and len(website_sale_product_uom)&gt;1 else ' d-none'} #{_classes}">
+	            <t t-set="curr_um" t-value="website.get_current_uom_available()" />
+	            <a role="button" href="#" class="dropdown-toggle btn btn-secondary" data-toggle="dropdown">
+	                <t t-esc="curr_um and curr_um.name or ' - '" />
+	            </a>
+	            <div class="dropdown-menu" role="menu">
+	                <t t-foreach="website_sale_product_uom" t-as="pl">
+	                    <a role="menuitem" t-att-href="'/shop/change_pricelist/%s' % pl.id" class="dropdown-item">
+	                        <span class="switcher_uom" t-att-data-um_id="pl.id" t-esc="pl.name" />
+	                    </a>
+	                </t>
+	            </div>
+	        </div>
+			 -->
+			
+			<select id="mySelect" class="form-control" onchange="myFunction()">
+                <option t-foreach="product.uom_ids.uom_id" t-as="puom">
+                    <t t-esc="puom.name"/>
+                </option>
+            </select>
+             
+		</xpath>
+	</template>
+</odoo>

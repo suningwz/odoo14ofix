@@ -1,0 +1,18 @@
+<odoo>
+  <data>
+    <record id="view_add_analytic_account_mm" model="ir.ui.view">
+      <field name="name">view.add.analytic_account.mm</field>
+      <field name="model">pos.order</field>
+      <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//page[@name='extra']/group" position="inside">
+          <group string="Facturación">
+            <field name="analytic_account_id" string="Cuenta analítica"/>
+          </group>
+
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
+

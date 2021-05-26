@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cost_cofiguration,cost.configuration,model_cost_configuration,,1,1,1,1
+access_price_cofiguration,price.configuration,model_price_configuration,,1,1,1,1
+access_cost_history,cost.history,model_cost_history,,1,1,1,1
+access_price_history,price.history,model_price_history,,1,1,1,1
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="company_branch_view_tree" model="ir.ui.view">
+        <field name="name">company.branch.tree</field>
+        <field name="model">company.branch</field>
+        <field name="arch" type="xml">
+            <tree string="Company Branch">
+            	<field name="code"/>
+                <field name="name"/>
+                <field name="riesgo_puesto"/>
+                <field name="registro_patronal"/>
+                <field name="xs_id_region"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="company_branch_view_form" model="ir.ui.view">
+        <field name="name">company.branch.form</field>
+        <field name="model">company.branch</field>
+        <field name="arch" type="xml">
+            <form string="Company Branch">
+            	<group>
+            		<group>
+            			<field name="code" required="1"/>
+		                <field name="name" required="1"/>
+		                <field name="riesgo_puesto"/>
+		                <field name="registro_patronal"/>
+		                <field name="xs_id_region"/>
+		                <field name="company_id" required="1"/>
+                	</group>
+                	<group></group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+        <record id="company_branch_search_view" model="ir.ui.view">
+            <field name="name">company.branch.search.view</field>
+            <field name="model">company.branch</field>
+            <field name="arch" type="xml">
+                <search string="Company Branch">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="riesgo_puesto"/>
+                    <field name="registro_patronal"/>
+                    <field name="company_id"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Company" name='company_id' context="{'group_by':'company_id'}"/>
+                        <filter string="Risk class" name='riesgo_puesto' context="{'group_by':'riesgo_puesto'}"/>
+                        <filter string="Registro Patronal" name='registro_patronal' context="{'group_by':'registro_patronal'}"/>
+                        <filter string="Region" name='xs_id_region' context="{'group_by':'xs_id_region'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    <record id="action_company_branch" model="ir.actions.act_window">
+        <field name="name">Company Branch</field>
+        <field name="res_model">company.branch</field>
+        <field name="view_mode">tree,form,search</field>
+        <field name="type">ir.actions.act_window</field>    
+    </record>
+
+    <menuitem action="action_company_branch" id="menu_company_branch"
+        parent="base.menu_users" sequence="50"/>
+
+</odoo>

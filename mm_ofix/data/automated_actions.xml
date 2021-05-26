@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mm_update_qty_done" model="base.automation">
+        <field name="name">Actualiza Qty Done en Stock Move Line</field>
+        <field name="active">1</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="stock.model_stock_move_line"/>
+        <field name="trigger">on_create</field>
+        <field name="trg_date_range_type"></field>
+        <field name="filter_domain">["&amp;",["picking_code","=","incoming"],["qty_done","=",0]]</field>
+        <field name="code">
+#log('Actualiza qty_done por módulo', level='info')
+record.write({'qty_done': record.product_uom_qty })
+        </field>
+    </record>
+
+    <record id="mm_update_analytic_account" model="base.automation">
+        <field name="name">Actualiza Campo Analytic account</field>
+        <field name="active">1</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="trigger">on_create_or_write</field>
+        <field name="trg_date_range_type"></field>
+        <field name="code">
+#buscar empleado
+employee = env['hr.employee'].search([('user_id', '=', records.user_id.id)])
+#buscar contrato
+contrato = env['hr.contract'].search([('employee_id', '=', employee.id)])
+#cambiar camppo
+record.write({'analytic_account_id': contrato.analytic_account_id})
+        </field>
+    </record>
+
+    <record id="mm_update_journal_id" model="base.automation">
+        <field name="name">Crea diario contable</field>
+        <field name="active">1</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="trigger">on_create</field>
+        <field name="trg_date_range_type"></field>
+        <field name="code">
+veri = record.invoice_origin
+
+if veri is False:
+  veri = 'a'
+else:
+  order = env['stock.picking'].search([('origin', '=', record.invoice_origin)])
+  if order.origin is False:
+    location = 'a'
+  else:
+
+    name = order.origin[0]
+    pos = order.pos_session_id.id
+    pos_st = str(pos)
+
+    if pos_st.isnumeric():
+      location = 'a'
+    else:
+      if name == 'P':
+        #buscar locacion
+        location = env['stock.location'].search([('id', '=', order.location_dest_id.id)])
+        #cambiar dato
+        record.write({'journal_id': location.diario_compra.id})
+
+      else:
+        #cambiar dato
+        location = env['stock.location'].search([('id', '=', order.location_id.id)])
+        #cambiar dato
+        record.write({'journal_id': location.diario_venta.id})
+
+        </field>
+    </record>
+
+    <record id="mm_update_analytic_account_pos" model="base.automation">
+        <field name="name">Actualiza Campo Analytic account en pos</field>
+        <field name="active">1</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="point_of_sale.model_pos_order"/>
+        <field name="trigger">on_create_or_write</field>
+        <field name="trg_date_range_type"></field>
+        <field name="code">
+#buscar contrato
+contrato = env['hr.contract'].search([('employee_id', '=', records.employee_id.id)])
+#cambiar camppo
+record.write({'analytic_account_id': contrato.analytic_account_id})
+        </field>
+    </record>
+
+</odoo>

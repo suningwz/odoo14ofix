@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_uom,product.uom,model_product_uom,,1,1,1,1
+access_price_uom_user,price.uom.user,model_price_uom_user,,1,1,1,1
+access_uom_uom_public_user,uom.uom.public.user,uom.model_uom_uom,,1,0,0,0
+access_product_template_public_user,product.template.public.user,product.model_product_template,,1,0,0,0
+
+

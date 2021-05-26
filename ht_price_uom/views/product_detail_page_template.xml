@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="product_price_uom" inherit_id="website_sale.product_price">
+        <xpath expr="//h4[hasclass('css_non_editable_mode_hidden')]" position="after">
+            <t t-set="selection_mode" t-value="False"/>
+            <t>
+                 <input type="hidden" class="price_uom_info" name="price_uom_info" t-att-value="uom_attributes[-1][0]"/>
+                <select data-attribute_id="3" class="form-control js_uom_change always mb-2" name="ptal-4">
+                    <option t-att-value="False" t-att-data-value_id="False"></option>
+                    <t t-foreach="uom_attributes" t-as="uom">
+                        <option t-att-value="uom[0]" t-att-data-value_id="uom[0]"
+                                t-att-data-value_name="uom[2]" t-att-data-uom-id="uom[1]" t-att-data-price="uom[3]"
+                                data-attribute_name="Price"  t-att-data-title="uom[2]"
+                                t-att-selected="uom[4]">
+                            <t t-esc="uom[2]"/>
+                        </option>
+                    </t>
+                </select>
+            </t>
+
+        </xpath>
+    </template>
+
+</odoo>
